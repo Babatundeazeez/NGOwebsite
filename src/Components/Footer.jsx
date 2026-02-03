@@ -1,5 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { FaFacebook, FaFacebookF, FaLinkedin, FaLinkedinIn, FaTwitter} from 'react-icons/fa'
+import { Linkedin } from 'lucide-react'
 
 const Footer = () => {
   return (
@@ -55,6 +57,21 @@ const Footer = () => {
               <li>Phone No : 08101 222 333 1</li>
               <li>Location : Nigeria</li>
             </ul>
+
+            <div className='flex space-x-4 mt-4'>
+              <Link to='https://wwww.facebook.com' className='w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-blue-500'>
+              <FaFacebookF />
+              {/* <FaFacebook /> */}
+              </Link>
+              <Link to='https://www.twitter.com' className='w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-blue-500'>
+              <FaTwitter />
+              </Link>
+              <Link to='https://www.linkedin.com' className='w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-blue-500'>
+              {/* <FaLinkedin /> */}
+              <FaLinkedinIn />
+              </Link>
+
+            </div>
 
           </div>
 
