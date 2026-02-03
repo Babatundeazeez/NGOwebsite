@@ -5,7 +5,7 @@ const Button = ({children, variant="primary", onClick}) => {
     const btn = "px-4 py-3 rounded-lg font-semibold transition duration-200"
     const variants = {
         primary: "bg-blue-600 text-white hover:bg-blue-700",
-        secondary: "bg-gray-200 text-gray-800 hover:bg-gray-300 ml-auto md:hidden focus:outline-none",
+        secondary: "bg-gray-200 text-gray-800 hover:bg-gray-300 py-3 rounded-lg font-semibold ",
         danger: "bg-red-600 text-white hover:bg-red-700",
         warning: "bg-yellow-400 text-white hover:bg-yellow-800",
        // success: "bg-green-400 text-white hover:bg-green-800",
