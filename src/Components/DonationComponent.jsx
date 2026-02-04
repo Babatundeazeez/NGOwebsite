@@ -1,7 +1,44 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Button from './Button'
+import { Currency } from 'lucide-react'
 
 const DonationComponent = () => {
+    const publicKey = import.meta.VITE_PAYSTACK_PUBLIC_KEY
+
+    const [email, setEmail] = useState("")
+    const [amount, setAmount] = useState("")
+    const [name, setName] = useState("")
+
+    const payWithStack = () =>{
+        if (!email || !amount) {
+            alert("Please fill all fields")
+            return
+        }
+
+        const handler = window.PaystackPop.setup({
+            key : publicKey,
+            email : email,
+            amount : amount * 100,
+            Currency : "NGN",
+            ref : "NGO_" + Math.floor(Math.random() * 1000000000),
+            metadata: {
+                custom_fields: [
+                    {
+                        display_name : name,
+                        variable_name : "donor_name",
+                        value : name,
+                    },
+                ],
+            },
+            callback: function (response) {
+                alert("Payment Successful ! Ref: " + response.reference)
+            },
+            onClose: function (){
+                alert("Payment window close")
+            },
+        })
+        handler.openIframe()
+    }
   return (
     <div className='bg-gray-50 min-h-screen'>
 
@@ -56,18 +93,24 @@ const DonationComponent = () => {
                         type="text"
                         placeholder='Full Name'
                         className='w-full px-4 py-3 border rounded focus:outline-none focus:ring-2 focus:ring-green-500'
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
                         />
 
                         <input 
                         type="email"
                         placeholder='Email Address'
                         className='w-full px-4 py-3 border rounded focus:outline-none focus:ring-2 focus:ring-green-500'
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                          />
 
                          <input 
                          type="number"
                          placeholder='Donation Amount (#)'
                          className='w-full px-4 py-3 border rounded focus:outline-none focus:ring-2 focus:ring-green-500'
+                         value={amount}
+                         onChange={(e) => setAmount(e.target.value)}
                           />
 
                           <select 
@@ -79,7 +122,7 @@ const DonationComponent = () => {
                             <option value="">Monthly Donation</option>
                           </select>
 
-                          <Button variant='warning'>Donate Now</Button>
+                          <Button variant='warning' onClick={payWithStack}>Donate Now</Button>
 
                           <p className='text-sm text-gray-500 text-center'>
                             Secure payment processing. Your information is safe
